@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<launch>
+  <!-- Leave this here -->
+  <!-- <include file="$(find ugv_course_launch)/launch/audibot_sim_project.launch" /> -->
+  <include file="$(find ugv_course_launch)/launch/audibot_road_world.launch" />
+  <include file="$(find audibot_lane_detection)/launch/lane_detection.launch" >
+    <arg name="nodelet" value="true" />
+   </include>
+
+    <group ns="audibot" >
+    <node pkg="audibot_path_following" type="audibot_path_following" name="path_following" output="screen" />
+    <node pkg="audibot_twist_controller" type="audibot_twist_node" name="twist_control" output="screen" />
+    </group>
+  <!-- <node pkg="gps_sim_project" type="test_gps_sim_project" name="test" output="screen" /> -->
+  <node pkg="rviz" type="rviz" name="final_project_rviz" respawn="true" args="-d $(find gps_sim_project)/rviz/sim_project.rviz" />
+  
+
+
+  <!-- Launch your part of the system here! -->
+  <!-- <node ns="audibot" pkg="audibot_twist_controller" type="audibot_twist_node" name="audibot_twist_node" /> -->
+
+  <!-- <node pkg="final_project" type="waypoint" name="waypointer" output="screen"/> -->
+  <!-- <node pkg="final_project" type="main" name="main" output="screen"/> -->
+  <node pkg="final_project" type="target" name="target" output="screen"/>
+
+
+</launch>
